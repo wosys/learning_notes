@@ -1,0 +1,54 @@
+from sklearn.feature_extraction import DictVectorizer
+import csv
+from sklearn import tree
+from sklearn import preprocessing
+from sklearn.externals.six import StringIO
+
+# Read in the csv file and put features into list of dict and list of class label
+allElectronicsData = open(r'/personal/code/python/ML_maizi/decision_tree/AllElectronics.csv', 'rb')
+reader = csv.reader(allElectronicsData)
+headers = reader.next()
+
+print(headers)
+
+featureList = []
+labelList = []
+
+for row in reader:
+    labelList.append(row[len(row)-1])
+    rowDict = {}
+    for i in range(1, len(row)-1):
+        rowDict[headers[i]] = row[i]
+    featureList.append(rowDict)
+
+print(featureList)
+
+# Vetorize features
+# python 可以将 feature 转换成数据
+vec = DictVectorizer()  #实例化
+dummyX = vec.fit_transform(featureList) .toarray()
+
+# vectorize class labels
+lb = preprocessing.LabelBinarizer()
+dummyY = lb.fit_transform(labelList)
+print("dummyY: " + str(dummyY))
+
+# Using decision tree for classification
+# clf = tree.DecisionTreeClassifier()
+# 使用 id3 算法
+clf = tree.DecisionTreeClassifier(criterion='entropy')
+clf = clf.fit(dummyX, dummyY)
+
+oneRowX = dummyX[0, :]
+print("oneRowX: " + str(oneRowX))
+# 新数据用于预测-测试集
+newRowX = oneRowX
+newRowX[0] = 1
+newRowX[2] = 0
+print("newRowX: " + str(newRowX))
+
+#测试
+predictedY = clf.predict(newRowX.reshape(1,-1))
+#输出预测结果
+print("predictedY: " + str(predictedY))
+
