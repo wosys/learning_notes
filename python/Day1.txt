@@ -1,0 +1,112 @@
+对于单个字符的编码，ord()函数获取字符的整数表示，chr()函数把编码转换为对应的字符
+>>> ord('A') 
+65 
+>>> ord('中')
+20013 
+>>> chr(66) 
+'B' 
+>>> chr(25991)
+'文'
+
+以 Unicode表示的 str 通过 encode()方法可以编码为指定的 bytes
+>>> 'ABC'.encode('ascii')
+b'ABC' 
+>>> '中文'.encode('utf-8') 
+b'\xe4\xb8\xad\xe6\x96\x87' 
+含有中文的 str 无法用 ASCII 编码，因为中文编码的范围超过了 ASCII 编码的范围,会报错
+>>> '中文'.encode('ascii')
+Traceback (most recent call last):
+  File "<pyshell#8>", line 1, in <module>
+    '中文'.encode('ascii')
+UnicodeEncodeError: 'ascii' codec can't encode characters in position 0-1: ordinal not in range(128)
+
+如果我们从网络或磁盘上读取了字节流，那么读到的数据就是bytes。要把 bytes 变为 str，就需要用 decode()方法： 
+>>> b'ABC'.decode('ascii') 
+'ABC' 
+>>> b'\xe4\xb8\xad\xe6\x96\x87'.decode('utf-8') 
+'中文'
+
+# -*- coding: utf-8 -*- 
+是为了告诉 Python 解释器，按照 UTF-8 编码读取源代码，否则，你在源代码中写的中文输出可能会有乱码。
+
+占位符问题：
+>>> 'Hello, %s' % 'world' 
+'Hello, world' 
+>>> 'Hi, %s, you have $%d.' % ('Michael', 1000000) 
+'Hi, Michael, you have $1000000.' 
+格式化整数和浮点数还可以指定是否补 0 和整数与小数的位数：
+>>> '%2d-%02d' % (3, 1) 
+' 3-01' 
+>>> '%.2f' % 3.1415926 
+'3.14'
+如果你不太确定应该用什么，%s 永远起作用，它会把任何数据类型转换为字符串： 
+>>> 'Age: %s. Gender: %s' % (25, True) 
+'Age: 25. Gender: True'
+
+list列表里面，[-1]表示取倒数第一个，-2，-3...以此类推
+list 是一个可变的有序表，可以往 list 中追加元素到末尾:list.append("XXX")
+可以把元素插入到指定的位置:list.insert(position,"XXX")
+要删除 list 末尾的元素，用 pop()方法：list.pop(),要删除指定位置的元素，用 pop(i)方法，其中 i 是索引位置
+要把某个元素替换成别的元素，可以直接赋值给对应的索引位置：list[i] = "XXX"
+list 里面的元素的数据类型可以不同，如: list = ['Apple', 123, True] 
+list 元素也可以是另一个 list,如: list = ['python','java',['asp','php'],'scheme'],注意此时len(list)=4
+    要想取到'php',应该用 list[2][1] 表示
+元组一旦初始化就不能修改，与list类似，但是没有 append()，insert()这样的方法
+只有 1 个元素的元组定义时必须加一个逗号,来消除歧义： >>>t = (1,) 
+
+if <条件判断 1>:    
+    <执行 1> 
+elif <条件判断 2>:     
+    <执行 2> 
+elif <条件判断 3>:     
+    <执行 3> 
+else:
+    <执行 4>
+
+input()返回的数据类型是 str，str 不能直接和整数比较，必须先把 str 转换成整数。Python 提供了 int()函数
+s = input('birth: ') 
+birth = int(s) # 注意这里
+if birth < 2000:
+    print('00 前')
+else:    
+    print('00 后')  
+
+range()函数，可以生成一个整数序列，再通过 list()函数可以转换为 list。
+比如 range(5)生成的序列是从 0 开始小于 5 的整数： 
+>>> list(range(5)) 
+[0, 1, 2, 3, 4] 
+range(101)就可以生成 0-100 的整数序列
+
+python的循环有两种：
+一种是 for...in 循环，依次把 list 或 tuple 中的每个元素迭代出来
+第二种循环是 while 循环，只要条件满足，就不断循环，条件不满足时退出循环。
+
+字典：（键-值）
+dict 的 key 必须是不可变对象。 
+要避免 key 不存在的错误，有两种办法，一是通过 in 判断 key 是否存在：'XXX' in dict
+二是通过 dict 提供的 get 方法，如果 key 不存在，可以返回 None，或者自己指定的 value： 
+>>> d.get('Thomas') 
+>>> d.get('Thomas', -1) 
+-1
+注意：返回 None 的时候 Python 的交互式命令行不显示结果。 
+和 list 比较，dict 有以下几个特点： 
+1. 查找和插入的速度极快，不会随着 key 的增加而增加； 
+2. 需要占用大量的内存，内存浪费多。 
+而 list 相反： 
+1. 查找和插入的时间随着元素的增加而增加； 
+2. 占用空间小，浪费内存很少。 
+
+set 和 dict 类似，也是一组 key 的集合，但不存储 value。由于 key 不能重复，所以，在 set 中，没有重复的 key。 
+重复元素在 set 中自动被过滤
+通过 add(key)方法可以添加元素到 set 中，可以重复添加，但不会有效果，通过 remove(key)方法可以删除元素
+set 可以看成数学意义上的无序和无重复元素的集合，因此，两个 set 可以做数学意义上的交集、并集等操作：
+>>> s1 = set([1, 2, 3]) 
+>>> s2 = set([2, 3, 4])
+>>> s1 & s2
+{2, 3} 
+>>> s1 | s2 
+{1, 2, 3, 4} 
+
+str 是不变对象，而 list 是可变对象。对 list 进行操作，list 内部的内容是会变化的 
+而对于不可变对象，比如对 str 进行操作，不会改变其内容
+
