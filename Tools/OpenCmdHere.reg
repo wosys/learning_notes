@@ -1,0 +1,34 @@
+// 说明-START
+// Windows下给右键菜单里添加“在此处打开命令窗口”选项，可以免去cd。
+// 使用时删除说明部分，双击运行即可
+// 说明-END
+
+Windows Registry Editor Version 5.00
+
+[HKEY_CLASSES_ROOT\Directory\shell\OpenCmdHere]
+@="在此处打开命令窗口"
+"Icon"="cmd.exe"
+
+[HKEY_CLASSES_ROOT\Directory\shell\OpenCmdHere\command]
+@="cmd.exe /s /k pushd \"%V\""
+
+[HKEY_CLASSES_ROOT\Directory\Background\shell\OpenCmdHere]
+@="在此处打开命令窗口"
+"Icon"="cmd.exe"
+
+[HKEY_CLASSES_ROOT\Directory\Background\shell\OpenCmdHere\command]
+@="cmd.exe /s /k pushd \"%V\""
+
+[HKEY_CLASSES_ROOT\Drive\shell\OpenCmdHere]
+@="在此处打开命令窗口"
+"Icon"="cmd.exe"
+
+[HKEY_CLASSES_ROOT\Drive\shell\OpenCmdHere\command]
+@="cmd.exe /s /k pushd \"%V\""
+
+[HKEY_CLASSES_ROOT\LibraryFolder\background\shell\OpenCmdHere]
+@="在此处打开命令窗口"
+"Icon"="cmd.exe"
+
+[HKEY_CLASSES_ROOT\LibraryFolder\background\shell\OpenCmdHere\command]
+@="cmd.exe /s /k pushd \"%V\""
