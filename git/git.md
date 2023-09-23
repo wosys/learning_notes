@@ -131,10 +131,7 @@ git clone <repo> <directory> # 克隆到指定的目录
 ```
 
 > git clone git://github.com/schacon/grit.git mygrit
-> 
-> 
-> > 表示在当前目录下创建一个名为grit的目录，其中包含一个 .git 的目录，用于保存下载下来的所有版本记录。mygrit参数表示自己定义要新建的项目目录名称
-> > 
+>> 表示在当前目录下创建一个名为grit的目录，其中包含一个 .git 的目录，用于保存下载下来的所有版本记录。mygrit参数表示自己定义要新建的项目目录名称
 
 ### 2.2 git log
 

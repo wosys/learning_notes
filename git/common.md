@@ -8,7 +8,7 @@
 
 新建一个文件夹，在该目录的路径下使用bash命令：
 
-    git init # 初始化    
+    git init # 初始化
     git status # 查看状态和是否存在.git文件
 此时在该文件夹下就会有一个隐藏属性的文件夹.git
 **仓库分为工作区，暂存区，提交区**。文件夹即是工作区，现在我们在这个路径下使用bash命令：
@@ -30,10 +30,10 @@
 配置
 
     git config --list # 查看
-    git config -e    # 编辑，针对当前仓库 
+    git config -e    # 编辑，针对当前仓库
     git config -e --global   # 针对系统上所有仓库
-    
-    设置提交代码时的用户信息： 
+
+    设置提交代码时的用户信息：
     $ git config --global user.name "wintmain"
     $ git config --global user.email 203659850@qq.com
 
@@ -71,16 +71,16 @@ git diff 显示已写入暂存区和已经被修改但尚未写入暂存区文�
     git reset [--soft | --mixed | --hard] [HEAD]# 默认为--mixed，可以不用带该参数，用于重置暂存区的文件与上一次的提交(commit)保持一致，工作区文件内容保持不变。
 
     git reset [HEAD]
-    $ git reset HEAD^  # 回退所有内容到上一个版本   
+    $ git reset HEAD^  # 回退所有内容到上一个版本
     $ git reset 052e   # 回退到指定版本
 
     git reset --soft HEAD # --soft参数用于回退到某个版本
     $ git reset --soft HEAD~3 # 回退上上上一个版本
-    
+
     git reset --hard HEAD # --hard 参数撤销工作区中所有未提交的修改内容，将暂存区与工作区都回到上一次版本，并删除之前的所有信息提交
     [谨慎使用 –hard 参数，它会删除回退点之前的所有信息]
-    $ git reset –hard HEAD~3  # 回退上上上一个版本  
-    $ git reset –hard bae128  # 回退到某个版本回退点之前的所有信息。 
+    $ git reset –hard HEAD~3  # 回退上上上一个版本
+    $ git reset –hard bae128  # 回退到某个版本回退点之前的所有信息。
     $ git reset --hard origin/master    # 将本地的状态回退到和远程的一样
 
 >HEAD说明：
@@ -183,7 +183,7 @@ git pull 其实就是 git fetch 和 git merge FETCH_HEAD 的简写
 
 删除分支
 
-    git branch -d [branchname]   
+    git branch -d [branchname]（-D强制删除，用于分支没有合并的情况）
 
 当你切换分支的时候，Git 会用该分支的最后提交的快照替换你的工作目录的内容， 所以多个分支不需要多个目录。
 
@@ -199,6 +199,6 @@ git pull 其实就是 git fetch 和 git merge FETCH_HEAD 的简写
 如果你达到一个重要的阶段，并希望永远记住那个特别的提交快照，你可以使用 git tag 给它打上标签。
 
     git tag -a XXX # -a 意为"创建一个带注解的标签"
-    
+
     git tag # 查看所有标签
     git tag -a <tagname> -m "一些信息" # 指定标签信息命令
