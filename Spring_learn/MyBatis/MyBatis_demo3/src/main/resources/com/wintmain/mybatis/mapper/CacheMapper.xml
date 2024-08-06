@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wintmain.mybatis.mapper.CacheMapper">
+
+    <cache type="org.mybatis.caches.ehcache.EhcacheCache"></cache>
+    <select id="getEmpByEid" resultType="Emp">
+        select * from t_emp where eid = #{eid}
+    </select>
+
+    <!--    &lt;!&ndash;Mapper中的方法&ndash;&gt;-->
+    <!--    <insert id="insert">-->
+    <!--        insert into X values ()-->
+    <!--    </insert>-->
+
+    <!--    <update id="update">-->
+    <!--        update X set X = X where X = X-->
+    <!--    </update>-->
+
+    <!--    <delete id="delete">-->
+    <!--        delete from X where X = X-->
+    <!--    </delete>-->
+    <!--    -->
+    <!--    <select id="getUserByX" resultType="">-->
+    <!--        select * from X where X = X-->
+    <!--    </select>-->
+
+    <!--    <select id="getAll" resultType="">-->
+    <!--        select * from X-->
+    <!--    </select>-->
+
+</mapper>
